@@ -81,7 +81,7 @@ jobs:
         run: (Get-Content -path package.json -Raw) -replace "--access public","--access public --tag ${{ steps.vars.outputs.branchName }}" | Set-Content -Path package.json
 
       - name: replace version text for dev branches
-        if: ${{ steps.vars.outputs.branchName != env.MainBranch && steps.package_json_exists.outputs.files_exists == 'true' }}
+        if: ${{ steps.vars.outputs.branchName != env.MainBranch && steps.package_json_exists.outputs.files_exists == 'true' }} 
         shell: pwsh
         run: (Get-Content -path package.json -Raw) -replace "version patch","version ${{ steps.versionBump.outputs.new_tag }}-${{ steps.vars.outputs.branchName }} --no-git-tag-version -f" | Set-Content -Path package.json
 
